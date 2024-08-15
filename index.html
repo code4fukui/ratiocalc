@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<title>非計算機/ratiocalc</title>
+</head><body>
+
+<h1>非計算機/ratiocalc</h1>
+
+<table>
+<tr>
+  <td class=utd><input type=number id=i1 tabindex=1></td>
+  <td rowspan=2 id=eq>=</td>
+  <td class=utd><input type=number id=i3 tabindex=3></td>
+</tr>
+<tr>
+  <td><input type=number id=i2 tabindex=2></td>
+  <td><input type=text id=i4 tabindex=4 readonly></td>
+</tr>
+</table>
+
+<hr>
+Base App: <a href=https://fukuno.jig.jp/2012/ratiocalc>ratiocalc</a><br>
+<a href=https://github.com/code4fukui/ratiocalc/>src on GitHub</a><br>
+
+<br>
+<script type="module" src="https://code4fukui.github.io/qr-code/qr-code.js"></script><qr-code></qr-code>
+
+<script type="module">
+import { addComma, removeComma } from "https://js.sabae.cc/Num.js";
+import { IndexedStorage } from "https://code4fukui.github.io/IndexedStorage/IndexedStorage.js";
+
+const storage = await IndexedStorage.create("ratiocalc", 1);
+const nums = JSON.parse(await storage.getItem("nums") || `["", "", ""]`);
+const saveNums = async () => {
+  const nums = [i1.value, i2.value, i3.value];
+  await storage.setItem("nums", JSON.stringify(nums));
+};
+
+i1.value = nums[0];
+i2.value = nums[1];
+i3.value = nums[2];
+
+const f = () => {
+  const v = (inp) => removeComma(inp.value);
+  const n = v(i2) / v(i1) * v(i3);
+  i4.value = isNaN(n) ? "" : addComma(n, 1);
+  saveNums();
+};
+console.log(addComma(10000.333, 1))
+i1.onchange = i1.onkeyup = f;
+i2.onchange = i2.onkeyup = f;
+i3.onchange = i3.onkeyup = f;
+f();
+</script>
+
+<style>
+body {
+  text-align: center;
+  font-family: sans-serif;
+}
+#eq {
+  padding: 4px;
+  font-size: 24px;
+}
+.utd {
+  border-bottom: 2px solid black;
+}
+input {
+  font-size: 22px;
+  text-align: right;
+  width: 5em;
+  margin: 0.2em .5em 0.2em .5em;
+  padding: 0.6em 0.3em;
+}
+table {
+  display: inline-block;
+}
+#i4 {
+  background: #ccc;
+  outline: 2px solid orange;
+}
+a {
+  color: gray !important;
+}
+</style>
+
+</body>
+</html>
