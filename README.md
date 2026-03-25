@@ -1,21 +1,30 @@
 # ratiocalc
-日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
-A simple web-based ratio calculator.
+比計算機/ratiocalc
 
-## Demo
-The app is hosted at [https://code4fukui.github.io/ratiocalc/](https://code4fukui.github.io/ratiocalc/).
+**Live demo**: https://code4fukui.github.io/ratiocalc/
 
 ## Features
-- Calculates ratios based on user input
-- Stores the last used values in the browser's IndexedDB
-- Provides a QR code for easy access on mobile devices
 
-## Usage
-1. Enter the first and second numbers in the input fields.
-2. The third field will automatically calculate the ratio based on the first two numbers.
-3. The calculated value will be displayed with commas for readability.
-4. The last used values are automatically saved in the browser's IndexedDB and restored on page load.
+- Persistent local storage via IndexedDB
+
+## Technology Stack
+
+**Browser modules (ES imports):**
+
+- [`Num.js`](https://js.sabae.cc/Num.js)
+- [`IndexedStorage.js`](https://code4fukui.github.io/IndexedStorage/IndexedStorage.js)
+
+
+## Installation & Setup
+
+No build step required. Clone the repository and open `index.html` in a browser,
+or visit the live demo at https://code4fukui.github.io/ratiocalc/
+
+## Contributing
+
+Contributions are welcome. Please open an issue or pull request on GitHub.
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
+
+MIT License. See [LICENSE](./LICENSE) for details.
